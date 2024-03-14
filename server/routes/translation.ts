@@ -5,19 +5,53 @@ import 'dotenv/config'
 const router = express.Router()
 const yodaApiKey = process.env.YODA_API_KEY
 
-router.get('/', async (req, res, next) => {
+// translates the req.body.text
+router.get('/', async (req, res) => {
   try {
-    const response = await request
-      .get('https://api.funtranslations.com/translate/yoda.json')
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      .set('X-Funtranslations-Api-Secret', yodaApiKey!)
-      .query({})
+    const textToTranslate = req.query.text // Get the text to translate from the query parameter
 
-    console.log(response)
+    if (!textToTranslate) {
+      throw new Error('Text to translate is missing')
+    }
+
+    const response = await request  
+      .get('https://api.funtranslations.com/translate/yoda.json')
+      .set('X-Funtranslations-Api-Secret', yodaApiKey!)
+      .query({ text: textToTranslate }) // Pass text to translate as query parameter
+
+    console.log(response.body) // Logging the response body
 
     res.json(response.body)
   } catch (error) {
-    console.log(error)
-    next(error)
+    console.error('Error translating text')
+  }
+})
+
+// Post
+router.post('/', async (req, res) => {
+  try {
+    const yodaApiKey = process.env.YODA_API_KEY
+    const textToTranslate = req.body.text
+
+    if (!yodaApiKey) {
+      throw new Error('Yoda API key is missing')
+    }
+
+    if (!textToTranslate) {
+      throw new Error('Text to translate is missing')
+    }
+
+    const response = await request
+      .get('https://api.funtranslations.com/translate/yoda.json')
+      .set('X-Funtranslations-Api-Secret', yodaApiKey ?? '')
+      .query({ text: textToTranslate }) // Pass text to translate as query parameter
+
+    console.log(response.body) // Logging the response body
+
+    res.json(response.body)
+
+    res.json(response.body)
+  } catch (error) {
+    console.error('Error translating text')
   }
 })
