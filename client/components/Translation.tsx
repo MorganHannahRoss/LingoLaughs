@@ -1,12 +1,15 @@
-export function Translation () {
+function Translation () {
   return(
     <>
-      <div>
+      <div className="input-text">
         <p>Input Translation</p>
+        <button> 
       </div>
-      <div>
+      <div className="output-text">
         <p>Output Translation</p>
       </div>
     </>
   )
 }
+
+export default Translation
