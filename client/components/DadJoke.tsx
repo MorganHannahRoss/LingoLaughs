@@ -5,9 +5,11 @@ function DadJoke() {
   const { data } = useQuery({ queryKey: ['joke'], queryFn: () => getDadJoke() })
   return (
     <>
-      <div>
-        <h1>{data?.attachments[0].text}</h1>
-        <button onClick={getDadJoke} >New Joke</button>
+      <div className="translation-container">
+        <div className="input-text">
+          <h1>{data?.attachments[0].text}</h1>
+          <button onClick={getDadJoke}>New Joke</button>
+        </div>
       </div>
     </>
   )

@@ -1,6 +1,5 @@
 import express from 'express'
 import request from 'superagent'
-import 'dotenv/config'
 
 const router = express.Router()
 const yodaApiKey = process.env.YODA_API_KEY
@@ -14,9 +13,9 @@ router.get('/', async (req, res) => {
       throw new Error('Text to translate is missing')
     }
 
-    const response = await request  
-      .get('https://api.funtranslations.com/translate/yoda.json')
-      .set('X-Funtranslations-Api-Secret', yodaApiKey!)
+    const response = await request
+      .get('http://localhost:3000/translations')
+      .set('X-Funtranslations-Api-Secret', yodaApiKey ?? '')
       .query({ text: textToTranslate }) // Pass text to translate as query parameter
 
     console.log(response.body) // Logging the response body
@@ -24,6 +23,7 @@ router.get('/', async (req, res) => {
     res.json(response.body)
   } catch (error) {
     console.error('Error translating text')
+    res.status(500)
   }
 })
 
@@ -55,3 +55,5 @@ router.post('/', async (req, res) => {
     console.error('Error translating text')
   }
 })
+
+export default router

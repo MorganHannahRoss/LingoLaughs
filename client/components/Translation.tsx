@@ -1,24 +1,20 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { FormEvent, useState } from 'react'
 import request from 'superagent'
-import { Contents } from '../../models/translation'
 
 function Translator() {
   const [inputText, setInputText] = useState('')
+
   const [loading, setLoading] = useState(false)
-  const queryClient = useQueryClient()
 
   const mutation = useMutation({
-    mutationFn: async (text) => {
+    mutationFn: async (text: string) => {
       const response = await request
-        .post('https://api.funtranslations.com/translate/yoda.json')
+        .post('http://localhost:3000/translations')
         .send({ text })
       return response.body.contents.translated
     },
-    onSuccess: (data) => {
-      setTranslatedText(data)
-      queryClient.invalidateQueries('translations')
-    },
+    onSuccess: () => {},
   })
 
   const handleSubmit = async (event: FormEvent) => {
@@ -50,7 +46,7 @@ function Translator() {
       </div>
       <div className="translation-container">
         <div className="input-text">
-          <p>Your Personalised Translation: </p>
+          <p>Your Yoda Translation: </p>
           {mutation.isSuccess && <p>{mutation.data}</p>}
         </div>
       </div>
@@ -59,6 +55,3 @@ function Translator() {
 }
 
 export default Translator
-function setTranslatedText(data: any) {
-  throw new Error('Function not implemented.')
-}
