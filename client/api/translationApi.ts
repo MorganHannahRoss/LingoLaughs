@@ -1,7 +1,7 @@
-// import request from 'superagent'
-// import { Cryptos } from '../../models/translation.ts'
+import request from 'superagent'
+import { Translate } from '../../models/translation.ts'
 
-// export async function getCryptos(): Promise<Cryptos[]> {
-//   const response = await request.get('/api/v1/cryptos')
-//   return response.body
-// }
+export async function getTranslation(): Promise<Translate> {
+  const res = await request.get('/api/v1/translation')
+  return res.body
+}
