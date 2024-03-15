@@ -33,6 +33,25 @@ function Translator() {
     setInputText(event.target.value)
   }
 
+  //handle the dad
+  const handleTranslateDadJoke = async () => {
+    setLoading(true)
+    try {
+      const response = await fetch('https://icanhazdadjoke.com/', {
+        headers: {
+          Accept: 'application/json',
+        },
+      })
+      const data = await response.json()
+      setInputText(data.joke)
+      await mutation.mutateAsync(data.joke)
+    } catch (error) {
+      console.error('Error fetching Dad joke:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <>
       <div className="translation-container">
@@ -44,10 +63,26 @@ function Translator() {
           </button>
         </form>
       </div>
+
       <div className="translation-container">
         <div className="input-text">
           <p>Your Yoda Translation: </p>
           {mutation.isSuccess && <p>{mutation.data}</p>}
+        </div>
+      </div>
+
+      <div className="translation-container">
+        <div className="input-text">
+          <p>Your Yoda Dad Joke: </p>
+          {mutation.isSuccess && <p>{mutation.data}</p>}
+          <button
+            type="submit"
+            className="input-text"
+            onClick={handleTranslateDadJoke}
+            disabled={loading}
+          >
+            {loading ? 'Loading Dad Joke...' : 'Translate Dad Joke'}
+          </button>
         </div>
       </div>
     </>

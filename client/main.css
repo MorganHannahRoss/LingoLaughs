@@ -73,7 +73,16 @@ body {
 }
 
 .Joke-text {
-
+font-family: "comic Sans Ms",cursive,sans-serif;
+font-size: 24px;
+  color:chocolate;
+  text-align: center;
+  padding: 20px;
+  background-color: #F0F8FF;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 /* Responsive styling */
@@ -83,17 +92,6 @@ body {
   }
 }
 
-/* .translation-container {
-  max-width: 600px;
-  display: flex;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid ;
-  border-radius: 8px;
-  background-color: grey;
-  justify-content: center;
-  align-items: center;
-}
 
 
 
