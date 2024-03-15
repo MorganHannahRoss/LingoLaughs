@@ -1,6 +1,10 @@
 import request from 'superagent'
+import { Translate } from '../models/translation.ts'
 
-export async function getGreeting(): Promise<string> {
-  const res = await request.get('/api/v1/greeting')
-  return res.body.greeting
+const yodaServerURL = '/api.funtranslations.com/translate'
+
+export function getTranslate(): Promise<Translate> {
+  return request
+    .get(`${yodaServerURL}/yoda.json`)
+    .then((response) => response.body)
 }
