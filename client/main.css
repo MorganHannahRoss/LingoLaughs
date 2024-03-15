@@ -72,6 +72,10 @@ body {
   margin-bottom: 10px;
 }
 
+.Joke-text {
+
+}
+
 /* Responsive styling */
 @media (max-width: 768px) {
   .input-text, .output-text {
