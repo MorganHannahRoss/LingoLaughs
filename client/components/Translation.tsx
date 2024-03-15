@@ -19,13 +19,17 @@ function Translator() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    setLoading(true)
-    try {
-      await mutation.mutateAsync(inputText)
-    } catch (error) {
-      console.error('Error translating text:', error)
-    } finally {
+    if (inputText === '') {
       setLoading(false)
+    } else {
+      setLoading(true)
+      try {
+        await mutation.mutateAsync(inputText)
+      } catch (error) {
+        console.error('Error translating text:', error)
+      } finally {
+        setLoading(false)
+      }
     }
   }
 
