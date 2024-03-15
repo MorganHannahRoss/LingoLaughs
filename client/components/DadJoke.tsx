@@ -12,9 +12,7 @@ function DadJoke() {
       <div className="translation-container">
         <div className="input-text">
           <h1 className="Joke-text">{data?.attachments[0].text}</h1>
-          <button type="submit" className="input-text button" onClick={refetch}>
-            New Joke
-          </button>
+          <button type='submit' className='input-text button' onClick={() => refetch()}>New Joke</button>
         </div>
       </div>
     </>
