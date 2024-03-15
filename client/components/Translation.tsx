@@ -9,7 +9,7 @@ function Translator() {
 
   const mutation = useMutation({
     mutationFn: async (text: string) => {
-      const response = await request.post('/translations').send({ text })
+      const response = await request.post('http://localhost:3000/translations').send({ text })
       return response.body.contents.translated
     },
     onSuccess: () => {},
