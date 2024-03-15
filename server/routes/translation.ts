@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     }
 
     const response = await request
-      .get('http://localhost:3000/translations')
+      .get('/translations')
       .set('X-Funtranslations-Api-Secret', yodaApiKey ?? '')
       .query({ text: textToTranslate }) // Pass text to translate as query parameter
 

@@ -2,7 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 import { getDadJoke } from '../api/dadjokeapi'
 
 function DadJoke() {
-  const { data, refetch } = useQuery({ queryKey: ['joke'], queryFn: () => getDadJoke() })
+  const { data, refetch } = useQuery({
+    queryKey: ['joke'],
+    queryFn: () => getDadJoke(),
+  })
 
   return (
     <>
